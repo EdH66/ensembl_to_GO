@@ -1,0 +1,73 @@
+---
+title: "ensembl_to_GO"
+author: "EC Harding"
+date: "2024-04-09"
+output: html_document
+version: "R version 4.4.2"
+---
+
+```{r setup, include=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE) 
+```
+
+# Libraries
+
+```{r echo=FALSE, message=FALSE, warning=TRUE}
+
+library(BiocManager)
+library(biomaRt)
+library(ensembldb)
+library(tidyverse)
+library(janitor)
+
+```
+
+# Load Query Data and extract ID lis to vector
+
+## e.g ensembl_example.csv
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+ensembl_df <- read.csv("ensembl_example.csv", header = TRUE) %>% janitor::clean_names()
+ensembl_vector <- ensembl_df %>% pull(ensembl_gene_id)
+
+```
+
+# Choose species for Biomart data
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+mouse <- "mmusculus_gene_ensembl" # Comment out as needed
+#human <- hsapiens_gene_ensembl # Comment out as needed
+
+
+
+```
+
+# Make BioMart object and query with vector
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+# make a Biomart object to query with vector list
+Biomart_genome = useMart("ensembl", dataset = mouse)
+#attributes(mouse_genome) # uncomment to see genome data only
+
+#Query the BioMart object for the IDs
+mus_gene_id <- getBM(filters = "ensembl_gene_id",
+                     attributes = c("ensembl_gene_id", "external_gene_name", "transcript_biotype", "description",
+                                    "go_id", "name_1006"
+                     values = ensembl_vector,
+                     mart = Biomart_genome,
+                     uniqueRows = TRUE) 
+head(mus_gene_id)
+
+```
+
+#Combine data for export
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+features_frequency_IDs <- merge(features_frequency, mus_gene_id, by = "feature", all.x = TRUE) %>% arrange(rank)
+features_leave_one_out_IDs <- merge(features_leave_one_out, mus_gene_id, by = "feature", all.x = TRUE) %>% arrange(rank)
+
+```
