@@ -1,6 +1,6 @@
 # ensembl_to_GO
 
-***Conversion of ensembl_id to gene name and gene ontology***
+***Simple conversion of ensembl_id to gene name and gene ontology***
  
 ## Contents
 * Scripts as .Rmd for conversion of ensembleID to gene names and ontology 
