@@ -4,7 +4,8 @@
 
 ## Contents
 * Packages.R (run this first) 
-* ensembl_to_GO.Rmd (conversion of ensembleID to gene names and ontology) 
+* ensembl_to_GO.Rmd (conversion of ensembleID to gene names and ontology)
+* ensembl_example.csv (short example data) 
 * README
   
 ## Workflow 
