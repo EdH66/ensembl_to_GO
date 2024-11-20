@@ -3,10 +3,10 @@
 ***Simple conversion of ensembl_id to gene name and gene ontology***
  
 ## Contents
-* Scripts as .Rmd for conversion of ensembleID to gene names and ontology 
+* Packages.R (run this first) 
+* ensembl_to_GO.Rmd (conversion of ensembleID to gene names and ontology) 
 * README
-* Packages required 
-
+  
 ## Workflow 
 
 1. Load libraries
