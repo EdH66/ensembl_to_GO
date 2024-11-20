@@ -14,7 +14,7 @@
 2. Assign BioMart for correct species 
 3. Query lsit of ensemble IDs and merge with gene names and ontology
 
-4. To come: Homologues and risk factor GWAS integration is the plan! 
+To come: Homologues and risk factor GWAS integration is the plan! 
 
 ## Licence
 
